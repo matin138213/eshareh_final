@@ -1,0 +1,5 @@
+{% for cat in categories %}
+    <a href="{% url 'category' cat.slug %}">{{ cat.title }}</a>
+    <h1>{{ cat.title }}</h1>
+    <img src="{{ cat.picture.url }}" alt="alt" width="350" height="350">
+{% endfor %}
