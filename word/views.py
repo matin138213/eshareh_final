@@ -18,4 +18,6 @@ def category(request, slug=None):
     if not queryset:
         category = get_object_or_404(Category, slug=slug)
         queryset = Word.objects.filter(category=category)
+        return render(request, 'word_list.html', {'words': queryset})
+
     return render(request, 'category.html', {'categories': queryset})

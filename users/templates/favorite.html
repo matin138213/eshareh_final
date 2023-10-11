@@ -1,0 +1,5 @@
+<h1>List favorite me</h1>
+{% for word in words %}
+    <a href="{% url 'word_detail' word.slug %}">{{ word.title }}</a>
+{% endfor %}
+

@@ -1,5 +1,10 @@
 {% for cat in categories %}
-    <a href="{% url 'category' cat.slug %}">{{ cat.title }}</a>
-    <h1>{{ cat.title }}</h1>
+    <button>
+    <a href="{% url 'category_detail' cat.slug %}">{{ cat.title }}</a>
+        <br>
+        <br>
+        <br>
+        <br>
     <img src="{{ cat.picture.url }}" alt="alt" width="350" height="350">
+    </button>
 {% endfor %}

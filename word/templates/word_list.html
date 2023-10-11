@@ -1,0 +1,4 @@
+{% for word in words %}
+    <a href="{% url 'word_detail' word.slug %}">{{ word.title }}</a>
+{#    <h1>{{ word.title }}</h1>#}
+{% endfor %}

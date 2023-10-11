@@ -3,4 +3,9 @@
     <p>{{ word.pronunciation }}</p>
     <img src="{{ word.picture.url }}" alt="{{ word.title }}" width="350" height="350">
     <video src="{{ word.video.url }}" height="350" width="350" autoplay="autoplay" controls="controls"></video>
+    {% if word in interest.word.all %}
+        <button type="button"><a href="{% url 'add_word_to_interes' word.slug %}">Delete</a></button>
+    {% else %}
+        <button type="button"><a href="{% url 'add_word_to_interest' word.slug %}">Add</a></button>
+    {% endif %}
 </center>
