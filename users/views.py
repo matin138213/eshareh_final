@@ -8,12 +8,9 @@ from .models import Word
 
 # Create your views here.
 def list_interest_user(request, slug=None):
-    user = Interest.objects.filter(user=request.user).first()
-    if user:
-        words = user.word.all()
-    else:
-        user=[]
-    return render(request, 'favorite.html', {'words': words})
+    interest = Interest.objects.filter(user=request.user).first()
+    word = interest.word.all()
+    return render(request, 'favorite.html', {'words':word})
 
 
 def add_word_to_interest(request, slug):

@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404
-
+import random
 from .models import Word, Category
+from django.http.response import HttpResponse
 
 
 # Create your views here.
@@ -21,3 +22,21 @@ def category(request, slug=None):
         return render(request, 'word_list.html', {'words': queryset})
 
     return render(request, 'category.html', {'categories': queryset})
+
+
+def random_word_exam(request):
+    random_word = random.choices(Word.objects.all(), k=4)
+    selected_one_word = random.sample(random_word, k=1)
+    context = {
+        'random_word': random_word,
+        'selected_one_word': selected_one_word[0],
+    }
+    return render(request, 'random.html', context)
+
+
+def true_exam(request):
+    return HttpResponse("T")
+
+
+def false_exam(request):
+    return HttpResponse("F")

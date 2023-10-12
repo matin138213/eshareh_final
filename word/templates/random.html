@@ -1,0 +1,8 @@
+{% for word in  random_word %}
+    {% if selected_one_word == word %}
+        <a href="{% url 'true_exam' %}">{{ word.title }}</a>
+    {% else %}
+        <a href="{% url 'false_exam' %}">{{ word.title }}</a>
+    {% endif %}
+{% endfor %}
+<img src="{{ selected_one_word.picture.url }}" alt="" width="150" height="150">
