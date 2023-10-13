@@ -10,4 +10,5 @@ urlpatterns = [
     path("exam/", views.random_word_exam, name='random_word_exam'),
     path("true/", views.true_exam, name='true_exam'),
     path("false/", views.false_exam, name='false_exam'),
+    path("search/", views.search, name='search'),
 ]

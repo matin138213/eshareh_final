@@ -1,0 +1,9 @@
+<center>
+    {% if user.picture %}
+        <img src="{{ user.picture.url }}" alt="" height="300" width="300">
+    {% endif %}
+    <h1>{{ user.first_name }}</h1>
+    <h2>{{ user.last_name }}</h2>
+    <p>{{ user.is_vip }}</p>
+    <p>{{ user.username }}</p>
+</center>

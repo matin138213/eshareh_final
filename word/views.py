@@ -40,3 +40,12 @@ def true_exam(request):
 
 def false_exam(request):
     return HttpResponse("F")
+
+
+def search(request):
+    if request.method == "POST":
+        searched = request.POST['searched']
+        words = Word.objects.filter(title__icontains=searched)
+        return render(request, 'result.html', {'searched': searched ,'words': words})
+    else:
+        return render(request, 'result.html', {})

@@ -1,6 +1,8 @@
+# from django.contrib.auth.models import User
+from django.contrib.auth.models import User
 from django.http.response import HttpResponse
 from django.shortcuts import render, get_object_or_404
-
+from django.contrib.auth import get_user_model
 from word.views import word
 from .models import CustomUser, Interest
 from .models import Word
@@ -10,7 +12,7 @@ from .models import Word
 def list_interest_user(request, slug=None):
     interest = Interest.objects.filter(user=request.user).first()
     word = interest.word.all()
-    return render(request, 'favorite.html', {'words':word})
+    return render(request, 'favorite.html', {'words': word})
 
 
 def add_word_to_interest(request, slug):
@@ -22,3 +24,8 @@ def add_word_to_interest(request, slug):
     else:
         interest.word.remove(word)
         return HttpResponse("remove as bookmark")
+
+
+def profile(request):
+    # context=CustomUser.objects.get(pk=request.user.pk)
+    return render(request, 'profile_user.html',{'context': request.user})

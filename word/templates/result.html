@@ -1,0 +1,9 @@
+{% if searched %}
+    <h1>you searched for {{ searched }}</h1>
+    <br>
+    {% for word in words %}
+        <a href="{% url 'word_detail' word.slug %}">{{ word.title }}</a>
+    {% endfor %}
+{% else %}
+    <h1> hey you forgot to search for a word</h1>
+{% endif %}

@@ -1,0 +1,7 @@
+<form  method=Post
+action="{% url 'search' %}">
+    {% csrf_token %}
+    <input type="search" placeholder="search words" aria-label="search" name="searched">
+    <button type="submit">search
+    </button>
+</form>
