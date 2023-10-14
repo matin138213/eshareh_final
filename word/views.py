@@ -1,16 +1,17 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404
 import random
 from .models import Word, Category
 from django.http.response import HttpResponse
 
-
+@login_required
 # Create your views here.
 def word(request, slug=None):
     queryset = get_object_or_404(Word, slug=slug)
     # category = get_object_or_404(Category, slug=slug)
     return render(request, 'word.html', {"word": queryset})
 
-
+@login_required
 def category(request, slug=None):
     queryset = Category.objects.filter(parent__isnull=True)
     if slug:
@@ -23,7 +24,7 @@ def category(request, slug=None):
 
     return render(request, 'category.html', {'categories': queryset})
 
-
+@login_required
 def random_word_exam(request):
     random_word = random.choices(Word.objects.all(), k=4)
     selected_one_word = random.sample(random_word, k=1)
@@ -33,15 +34,15 @@ def random_word_exam(request):
     }
     return render(request, 'random.html', context)
 
-
+@login_required
 def true_exam(request):
     return HttpResponse("T")
 
-
+@login_required
 def false_exam(request):
     return HttpResponse("F")
 
-
+@login_required
 def search(request):
     if request.method == "POST":
         searched = request.POST['searched']
