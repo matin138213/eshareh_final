@@ -1,15 +1,22 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404
 import random
+
+from users.models import Interest
 from .models import Word, Category
 from django.http.response import HttpResponse
+
 
 @login_required
 # Create your views here.
 def word(request, slug=None):
-    queryset = get_object_or_404(Word, slug=slug)
-    # category = get_object_or_404(Category, slug=slug)
-    return render(request, 'word.html', {"word": queryset})
+    word_interest = get_object_or_404(Word, slug=slug)
+    if word_interest in Interest.objects.get(user=request.user).word.all():
+        has_word = True
+    else:
+        has_word = False
+    return render(request, 'word.html', {"word": word_interest, "word_interest": has_word})
+
 
 @login_required
 def category(request, slug=None):
@@ -24,6 +31,7 @@ def category(request, slug=None):
 
     return render(request, 'category.html', {'categories': queryset})
 
+
 @login_required
 def random_word_exam(request):
     random_word = random.choices(Word.objects.all(), k=4)
@@ -34,19 +42,22 @@ def random_word_exam(request):
     }
     return render(request, 'random.html', context)
 
+
 @login_required
 def true_exam(request):
     return HttpResponse("T")
 
+
 @login_required
 def false_exam(request):
     return HttpResponse("F")
+
 
 @login_required
 def search(request):
     if request.method == "POST":
         searched = request.POST['searched']
         words = Word.objects.filter(title__icontains=searched)
-        return render(request, 'result.html', {'searched': searched ,'words': words})
+        return render(request, 'result.html', {'searched': searched, 'words': words})
     else:
         return render(request, 'result.html', {})
